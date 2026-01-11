@@ -1,4 +1,4 @@
-function MI = getMI(x, y, smoothingValue, units)
+function MI = getMI(x, y, nBins, smoothingValue, units)
 % getMI - Calculate mutual information between two variables
 %
 % Syntax: MI = getMI(x, y, smoothingValue, units)
@@ -6,6 +6,7 @@ function MI = getMI(x, y, smoothingValue, units)
 % Inputs:
 %   x              - Numeric vector of observations for variable X
 %   y              - Numeric vector of observations for variable Y
+%   nBins          - Positive scalar for bins used in histogram calculations
 %   smoothingValue - Positive scalar for Laplace smoothing to avoid log(0)
 %                    (default: 0.5)
 %   units          - String specifying units: 'nats' or 'bits'
@@ -29,6 +30,7 @@ function MI = getMI(x, y, smoothingValue, units)
 arguments
     x (:,1) double {mustBeNumeric, mustBeFinite, mustBeNonempty}
     y (:,1) double {mustBeNumeric, mustBeFinite, mustBeNonempty}
+    nBins (1,1) double {mustBeInteger}
     smoothingValue (1,1) double {mustBeNumeric, mustBePositive, mustBeFinite} = 0.5
     units (1,1) string {mustBeMember(units, ["nats", "bits"])} = "nats"
 end
@@ -42,9 +44,6 @@ end
 if length(x) < 10
     warning('getMI:SmallSampleSize', 'Sample size is very small (n=%d). Results may be unreliable.', length(x));
 end
-
-% Set number of bins for histogram
-nBins = 10;
 
 % Create bin edges for X and Y spanning their respective ranges
 binEdgesX = linspace(min(x), max(x), nBins + 1);

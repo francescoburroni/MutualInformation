@@ -1,5 +1,6 @@
 %% Calculate Mutual informaiton of two variables
 smoothingValue = 0.5;
+nBins = 25;
 nRep = 100;
 nObs = 10000;
 cols = colororder;
@@ -8,7 +9,7 @@ figure;
 for k = 1 : nRep
     x = randn(nObs,1);
     y = randn(nObs,1);
-    MI(k) = getMI(x,y,smoothingValue);
+    MI(k) = getMI(x,y,nBins,smoothingValue);
 end
 
 histogram(MI,FaceColor=cols(1,:)); hold on;
@@ -19,7 +20,7 @@ nRep = 100;
 for k = 1 : nRep
     x = randn(nObs,1);
     y = 2*x;
-    MI(k) = getMI(x,y,smoothingValue);
+    MI(k) = getMI(x,y,nBins,smoothingValue);
 end
 
 histogram(MI,FaceColor=cols(2,:))
