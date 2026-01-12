@@ -37,5 +37,6 @@ nBins = 20;
 smoothingValue = 0.5;
 MI1 = getMI(x1,y1,nBins,smoothingValue,"bits",doPlot=true,colorMap="bone");
 fprintf("MI of x1 and y1 is %.3f\n",MI1)
-MI2 = getMI(x2,y2,nBins,smoothingValue,"bits")
+%%
+MI2 = getMI(x2,y2,nBins,smoothingValue,"bits");
 fprintf("MI of x2 and y2 is %.3f\n",MI2)

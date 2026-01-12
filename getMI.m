@@ -57,6 +57,8 @@ binEdgesX = linspace(min(x), max(x), nBins + 1);
 binEdgesY = linspace(min(y), max(y), nBins + 1);
 
 % Compute joint histogram for (X,Y)
+tl = tiledlayout(1,2,TileSpacing="compact",Visible="off");
+nexttile()
 hXY = histogram2(x, y, nBins, ...
     XBinLimits=[binEdgesX(1), binEdgesX(end)], ...
     YBinLimits=[binEdgesY(1), binEdgesY(end)], ...
@@ -93,11 +95,30 @@ MI = sum(sum(pXY .* logFunc(pXY ./ PInd)));
 % Plot
 
 if options.doPlot 
-   
-    hXY.Normalization = "probability";
-    hXY.Visible = "on";    
+    tol = 0;
+    tl.Visible = "on";
+    histogram2('XBinEdges',binEdgesX,'YBinEdges',binEdgesY,'BinCounts',pXY,...
+        FaceColor="flat")
+    colorbar 
+    colormap(options.colorMap)
+    title("P(X,Y)")
+    grid on
+    box on
+    clim([0 max(pXY(:))+tol])
+    zlim([0 max(pXY(:))+tol])
+    set(gca,"FontSize",20,"LineWidth",2)
+
+    nexttile()
+    histogram2('XBinEdges',binEdgesX,'YBinEdges',binEdgesY,'BinCounts',PInd,...
+        FaceColor="flat")
     colorbar
     colormap(options.colorMap)
+    grid on
+    box on
+    title("P(X)P(Y)")
+    clim([0 max(pXY(:))+tol])
+    zlim([0 max(pXY(:))+tol])
+    set(gca,"FontSize",20,"LineWidth",2)
 
 end
 end
