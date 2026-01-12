@@ -24,3 +24,17 @@ for k = 1 : nRep
 end
 
 histogram(MI,FaceColor=cols(2,:))
+
+%%
+
+load("x1.csv")
+load("y1.csv")
+load("x2.csv")
+load("y2.csv")
+
+nBins = 20;
+smoothingValue = 0.5;
+MI1 = getMI(x1,y1,nBins,smoothingValue,"bits");
+fprintf("MI of x1 and y1 is %.3f\n",MI1)
+MI2 = getMI(x2,y2,nBins,smoothingValue,"bits");
+fprintf("MI of x2 and y2 is %.3f\n",MI2)

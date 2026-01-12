@@ -32,7 +32,7 @@ arguments
     y (:,1) double {mustBeNumeric, mustBeFinite, mustBeNonempty}
     nBins (1,1) double {mustBeInteger}
     smoothingValue (1,1) double {mustBeNumeric, mustBePositive, mustBeFinite} = 0.5
-    units (1,1) string {mustBeMember(units, ["nats", "bits"])} = "nats"
+    units (1,1) string {mustBeMember(units, ["nats", "bits"])} = "bits"
 end
 
 % Check that x and y have the same length
@@ -49,13 +49,6 @@ end
 binEdgesX = linspace(min(x), max(x), nBins + 1);
 binEdgesY = linspace(min(y), max(y), nBins + 1);
 
-% Compute marginal histogram for X
-hX = histogram(x, nBins, "BinEdges", binEdgesX, "Visible", "off");
-hold on;
-
-% Compute marginal histogram for Y
-hY = histogram(y, nBins, "BinEdges", binEdgesY, "Visible", "off");
-
 % Compute joint histogram for (X,Y)
 hXY = histogram2(x, y, nBins, ...
     XBinLimits=[binEdgesX(1), binEdgesX(end)], ...
@@ -63,20 +56,18 @@ hXY = histogram2(x, y, nBins, ...
     Visible="off");
 
 % Apply Laplace smoothing to histogram counts to avoid zero probabilities
-XValues = hX.Values' + smoothingValue;
-YValues = hY.Values' + smoothingValue;
-XYValues = hXY.Values' + smoothingValue;
+XY = hXY.Values + smoothingValue;
+pXY = XY / sum(XY, "all");
 
-% Normalize counts to obtain probability distributions
-pX = XValues / sum(XValues);           % P(X) - marginal distribution
-pY = YValues / sum(YValues);           % P(Y) - marginal distribution
-pXY = XYValues / sum(sum(XYValues));   % P(X,Y) - joint distribution
+% Derive marginals from pXY
+pX = sum(pXY, 1)';  % P(X) - marginal distribution
+pY = sum(pXY, 2)';  % P(Y) - marginal distribution
 
 % Create grids for computing independence assumption P(X)P(Y)
 % XGrid(i,j) = P(X=i) for all j
 XGrid = repelem(pX, 1, nBins);
 % YGrid(i,j) = P(Y=j) for all i
-YGrid = repelem(pY', nBins, 1);
+YGrid = repelem(pY, nBins, 1);
 
 % Compute product of marginals (independence assumption)
 PInd = XGrid .* YGrid;  % PInd(i,j) = P(X=i) * P(Y=j)
