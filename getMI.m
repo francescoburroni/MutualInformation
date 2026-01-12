@@ -95,17 +95,18 @@ MI = sum(sum(pXY .* logFunc(pXY ./ PInd)));
 % Plot
 
 if options.doPlot 
-    tol = 0;
+    % Note this is plotted after smoothing,
+    % we cannot use the original histogram
     tl.Visible = "on";
     histogram2('XBinEdges',binEdgesX,'YBinEdges',binEdgesY,'BinCounts',pXY,...
         FaceColor="flat")
     colorbar 
     colormap(options.colorMap)
-    title("P(X,Y)")
+    title("P(X,Y)",FontWeight="normal",Interpreter="latex")
     grid on
     box on
-    clim([0 max(pXY(:))+tol])
-    zlim([0 max(pXY(:))+tol])
+    clim([0 max(pXY(:))])
+    zlim([0 max(pXY(:))])
     set(gca,"FontSize",20,"LineWidth",2)
 
     nexttile()
@@ -115,9 +116,9 @@ if options.doPlot
     colormap(options.colorMap)
     grid on
     box on
-    title("P(X)P(Y)")
-    clim([0 max(pXY(:))+tol])
-    zlim([0 max(pXY(:))+tol])
+    title("P(X)P(Y)",FontWeight="normal",Interpreter="latex")
+    clim([0 max(pXY(:))])
+    zlim([0 max(pXY(:))])
     set(gca,"FontSize",20,"LineWidth",2)
 
 end
