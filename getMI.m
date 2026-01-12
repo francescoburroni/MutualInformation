@@ -1,4 +1,4 @@
-function MI = getMI(x, y, nBins, smoothingValue, units)
+function MI = getMI(x, y, nBins, smoothingValue, units, options)
 % getMI - Calculate mutual information between two variables
 %
 % Syntax: MI = getMI(x, y, smoothingValue, units)
@@ -33,6 +33,8 @@ arguments
     nBins (1,1) double {mustBeInteger}
     smoothingValue (1,1) double {mustBeNumeric, mustBePositive, mustBeFinite} = 0.5
     units (1,1) string {mustBeMember(units, ["nats", "bits"])} = "bits"
+    options.doPlot logical = false
+    options.colorMap (1,1) string = "gray"
 end
 
 % Check that x and y have the same length
@@ -58,7 +60,7 @@ binEdgesY = linspace(min(y), max(y), nBins + 1);
 hXY = histogram2(x, y, nBins, ...
     XBinLimits=[binEdgesX(1), binEdgesX(end)], ...
     YBinLimits=[binEdgesY(1), binEdgesY(end)], ...
-    Visible="off");
+    Visible="off",FaceColor="flat");
 
 % Apply Laplace smoothing to histogram counts to avoid zero probabilities
 XY = hXY.Values + smoothingValue;
@@ -88,4 +90,14 @@ end
 % MI(X;Y) = sum_i sum_j P(X=i,Y=j) * log(P(X=i,Y=j) / (P(X=i)*P(Y=j)))
 MI = sum(sum(pXY .* logFunc(pXY ./ PInd)));
 
+% Plot
+
+if options.doPlot 
+   
+    hXY.Normalization = "probability";
+    hXY.Visible = "on";    
+    colorbar
+    colormap(options.colorMap)
+
+end
 end
