@@ -1,7 +1,7 @@
 #' Calculate mutual information between two continuous variables
 #'
 #' @description
-#' Computes the mutual information \eqn{I(X;Y)} using a histogram-based
+#' Computes the mutual information \eqn{MI(X;Y)} using a histogram-based
 #' estimator with equally spaced bins and Laplace smoothing applied to the
 #' \emph{joint} histogram only. Bin edges are defined as equally spaced
 #' intervals between the minimum and maximum of each variable, matching

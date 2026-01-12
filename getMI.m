@@ -16,7 +16,7 @@ function MI = getMI(x, y, nBins, smoothingValue, units)
 %   MI - Mutual information in specified units
 %
 % Description:
-%   Computes the mutual information I(X;Y) using histogram-based estimation
+%   Computes the mutual information MI(X;Y) using histogram-based estimation
 %   with 10 bins. Smoothing is applied to avoid zero probabilities.
 %   Units can be 'nats' (natural log) or 'bits' (log base 2).
 %
@@ -38,6 +38,11 @@ end
 % Check that x and y have the same length
 if length(x) ~= length(y)
     error('getMI:DimensionMismatch', 'Input vectors x and y must have the same length.');
+end
+
+% Check minimum bin number
+if nBins < 2
+    error('getMI:SmallSampleSize', 'The number of bins (n=%d) has to be greater than 2.', nBins);
 end
 
 % Check minimum sample size
