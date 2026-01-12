@@ -14,9 +14,8 @@ The goal is to provide a **transparent, reproducible, and cross-language-consist
 
 Mutual information measures statistical dependence between two variables:
 
-[
-I(X;Y) = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{p_i p_j}
-]
+I(X; Y) = sum_{i,j} p_ij * log( p_ij / (p_i * p_j) )
+
 
 where:
 
