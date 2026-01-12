@@ -14,19 +14,13 @@ The goal is to provide a **transparent, reproducible, and cross-language-consist
 
 Mutual information measures statistical dependence between two variables:
 
-I(X; Y) = sum_{i,j} p_ij * log( p_ij / (p_i * p_j) )
-
-
-where:
-
-* (p_{ij}) is the joint probability mass function,
-* (p_i) and (p_j) are the marginal distributions.
+MI(X,Y) = sum_{i,j} p(X=i, Y=j) * log( p(X=i, Y=j) / ( p(X=i) * p(Y=j) ) )
 
 In this repository:
 
 * probabilities are estimated via a **2D histogram**,
 * **Laplace smoothing is applied to the joint histogram only**,
-* marginals are derived from the smoothed joint distribution (ensuring internal consistency).
+* marginals are derived from the smoothed joint distribution.
 
 ---
 
