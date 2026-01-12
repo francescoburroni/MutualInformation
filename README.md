@@ -10,11 +10,12 @@ The goal is to provide a **transparent, reproducible, and cross-language-consist
 
 ---
 
+
 ## Overview
 
 Mutual information measures statistical dependence between two variables:
 
-MI(X,Y) = sum_{i,j} p(X=i, Y=j) * log( p(X=i, Y=j) / ( p(X=i) * p(Y=j) ) )
+<img width="451" height="94" alt="Screenshot 2026-01-12 at 11 40 13" src="https://github.com/user-attachments/assets/4923a900-9aee-4e54-ac08-d00c3fa261aa" />
 
 In this repository:
 
