@@ -1,4 +1,4 @@
-function MI = getMI(x, y, nBins, smoothingValue, units)
+function MI = getMI(x, y, nBins, smoothingValue, units, options)
 % getMI - Calculate mutual information between two variables
 %
 % Syntax: MI = getMI(x, y, smoothingValue, units)
@@ -33,6 +33,8 @@ arguments
     nBins (1,1) double {mustBeInteger}
     smoothingValue (1,1) double {mustBeNumeric, mustBePositive, mustBeFinite} = 0.5
     units (1,1) string {mustBeMember(units, ["nats", "bits"])} = "bits"
+    options.doPlot logical = false
+    options.colorMap (1,1) string = "gray"
 end
 
 % Check that x and y have the same length
@@ -42,7 +44,7 @@ end
 
 % Check minimum bin number
 if nBins < 2
-    error('getMI:SmallSampleSize', 'The number of bins (n=%d) has to be greater than 2.', nBins);
+    error('getMI:nBinsTooSmall', 'The number of bins (n=%d) has to be greater than 2.', nBins);
 end
 
 % Check minimum sample size
@@ -58,7 +60,7 @@ binEdgesY = linspace(min(y), max(y), nBins + 1);
 hXY = histogram2(x, y, nBins, ...
     XBinLimits=[binEdgesX(1), binEdgesX(end)], ...
     YBinLimits=[binEdgesY(1), binEdgesY(end)], ...
-    Visible="off");
+    Visible="off",FaceColor="flat");
 
 % Apply Laplace smoothing to histogram counts to avoid zero probabilities
 XY = hXY.Values + smoothingValue;
@@ -88,7 +90,6 @@ end
 % MI(X;Y) = sum_i sum_j P(X=i,Y=j) * log(P(X=i,Y=j) / (P(X=i)*P(Y=j)))
 MI = sum(sum(pXY .* logFunc(pXY ./ PInd)));
 
-
 % Plot
 
 if options.doPlot 
@@ -97,10 +98,6 @@ if options.doPlot
     hXY.Visible = "on";    
     colorbar
     colormap(options.colorMap)
-
-    nexttile()
-
-    
 
 end
 end
