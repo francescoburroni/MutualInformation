@@ -116,5 +116,5 @@ getMI <- function(x, y, nBins = 20, smoothingValue = 0.5, units = "bits") {
   MI <- sum(pXY * logFunc(pXY / PInd))
 
   if (MI < 0 && MI > -1e-12) MI <- 0
-  MI
+  return(MI)
 }
