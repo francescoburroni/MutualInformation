@@ -5,16 +5,17 @@ This repository contains **matched MATLAB and R implementations** of a histogram
 The goal is to provide a **transparent, reproducible, and cross-language-consistent** implementation that:
 
 * uses identical binning rules,
-* applies Laplace smoothing,
+* applies Laplace smoothing (Jeffrey-Perks law),
 * and yields comparable (albein not perfectly identical) numerical results in MATLAB and R.
 
 ---
+
 
 ## Overview
 
 Mutual information measures statistical dependence between two variables:
 
-MI(X,Y) = sum_{i,j} p(X=i, Y=j) * log( p(X=i, Y=j) / ( p(X=i) * p(Y=j) ) )
+<img width="451" height="94" alt="Screenshot 2026-01-12 at 11 40 13" src="https://github.com/user-attachments/assets/4923a900-9aee-4e54-ac08-d00c3fa261aa" />
 
 In this repository:
 
@@ -177,6 +178,15 @@ This code is intended for:
 * understanding estimator behavior and pitfalls.
 
 It is **not** meant to be a state-of-the-art MI estimator.
+
+---
+
+## References
+
+Burroni, F., & Tilsen, S. (2025). Thai speakers time lexical tones to supralaryngeal articulatory events. Journal of Phonetics, 108, 101389. https://doi.org/https://doi.org/10.1016/j.wocn.2024.101389 
+
+Iskarous, K., Mooshammer, C., Hoole, P., Recasens, D., Shadle, C. H., Saltzman, E., & Whalen, D. H. (2013). The coarticulation/invariance scale: Mutual information as a measure of coarticulation resistance, motor synergy, and articulatory invariance. The Journal of the Acoustical Society of America, 134(2), 1271-1282. 
+
 
 ---
 
