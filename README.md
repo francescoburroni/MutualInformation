@@ -5,7 +5,7 @@ This repository contains **matched MATLAB and R implementations** of a histogram
 The goal is to provide a **transparent, reproducible, and cross-language-consistent** implementation that:
 
 * uses identical binning rules,
-* applies Laplace smoothing (Jeffrey-Perk's law),
+* applies Laplace smoothing (Jeffrey-Perks law),
 * and yields comparable (albein not perfectly identical) numerical results in MATLAB and R.
 
 ---
