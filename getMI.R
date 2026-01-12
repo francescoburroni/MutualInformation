@@ -1,3 +1,59 @@
+#' Calculate mutual information between two continuous variables
+#'
+#' @description
+#' Computes the mutual information \eqn{I(X;Y)} using a histogram-based
+#' estimator with equally spaced bins and Laplace smoothing applied to the
+#' \emph{joint} histogram only. Bin edges are defined as equally spaced
+#' intervals between the minimum and maximum of each variable, matching
+#' MATLAB's \code{histogram2} behavior. Marginal distributions are derived
+#' from the smoothed joint distribution to ensure internal consistency.
+#'
+#' This estimator is sensitive to the choice of binning and to extreme
+#' outliers. In particular, variables with heavy tails may yield low mutual
+#' information if most samples fall into a small number of bins.
+#'
+#' @param x Numeric vector of observations for variable \eqn{X}.
+#' @param y Numeric vector of observations for variable \eqn{Y}.
+#' @param nBins Positive integer specifying the number of bins per dimension
+#'   used in the histogram (default: 20).
+#' @param smoothingValue Positive scalar specifying the Laplace smoothing
+#'   constant added to each joint histogram cell to avoid zero probabilities
+#'   (default: 0.5).
+#' @param units Character string specifying the output units. Must be either
+#'   \code{"bits"} (base-2 logarithm) or \code{"nats"} (natural logarithm).
+#'   Default is \code{"bits"}.
+#'
+#' @return
+#' A single numeric value giving the mutual information between \code{x} and
+#' \code{y} in the specified units.
+#'
+#' @details
+#' The mutual information is computed as
+#' \deqn{
+#' I(X;Y) = \sum_{i,j} p_{ij} \log \frac{p_{ij}}{p_i p_j},
+#' }
+#' where \eqn{p_{ij}} is the joint probability mass function estimated from
+#' a two-dimensional histogram, and \eqn{p_i} and \eqn{p_j} are the marginal
+#' distributions obtained by summing the joint distribution.
+#'
+#' Histogram bins are defined as left-closed, right-open intervals
+#' \eqn{[e_i, e_{i+1})}, except for the final bin which includes the right
+#' endpoint, reproducing MATLAB's binning convention.
+#'
+#' @examples
+#' set.seed(123)
+#'
+#' ## Independent variables
+#' x1 <- rnorm(1000)
+#' y1 <- rnorm(1000)
+#' getMI(x1, y1, nBins = 20)
+#'
+#' ## Nonlinearly dependent variables
+#' x2 <- rnorm(1000)
+#' y2 <- x2 + 1 / x2
+#' getMI(x2, y2, nBins = 20)
+#'
+#' @export
 getMI <- function(x, y, nBins = 20, smoothingValue = 0.5, units = "bits") {
 
   # ---- Validation ----
