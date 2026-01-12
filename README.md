@@ -5,7 +5,7 @@ This repository contains **matched MATLAB and R implementations** of a histogram
 The goal is to provide a **transparent, reproducible, and cross-language-consistent** implementation that:
 
 * uses identical binning rules,
-* applies Laplace smoothing,
+* applies Laplace smoothing (Jeffrey-Perk's law),
 * and yields comparable (albein not perfectly identical) numerical results in MATLAB and R.
 
 ---
@@ -178,6 +178,15 @@ This code is intended for:
 * understanding estimator behavior and pitfalls.
 
 It is **not** meant to be a state-of-the-art MI estimator.
+
+---
+
+## References
+
+Burroni, F., & Tilsen, S. (2025). Thai speakers time lexical tones to supralaryngeal articulatory events. Journal of Phonetics, 108, 101389. https://doi.org/https://doi.org/10.1016/j.wocn.2024.101389 
+
+Iskarous, K., Mooshammer, C., Hoole, P., Recasens, D., Shadle, C. H., Saltzman, E., & Whalen, D. H. (2013). The coarticulation/invariance scale: Mutual information as a measure of coarticulation resistance, motor synergy, and articulatory invariance. The Journal of the Acoustical Society of America, 134(2), 1271-1282. 
+
 
 ---
 
