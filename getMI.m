@@ -42,7 +42,7 @@ end
 
 % Check minimum bin number
 if nBins < 2
-    error('getMI:SmallSampleSize', 'The number of bins (n=%d) has to be greater than 2.', nBins);
+    error('getMI:nBinsTooSmall', 'The number of bins (n=%d) has to be greater than 2.', nBins);
 end
 
 % Check minimum sample size
