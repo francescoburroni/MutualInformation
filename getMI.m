@@ -88,4 +88,19 @@ end
 % MI(X;Y) = sum_i sum_j P(X=i,Y=j) * log(P(X=i,Y=j) / (P(X=i)*P(Y=j)))
 MI = sum(sum(pXY .* logFunc(pXY ./ PInd)));
 
+
+% Plot
+
+if options.doPlot 
+   
+    hXY.Normalization = "probability";
+    hXY.Visible = "on";    
+    colorbar
+    colormap(options.colorMap)
+
+    nexttile()
+
+    
+
+end
 end
