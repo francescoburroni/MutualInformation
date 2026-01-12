@@ -1,7 +1,7 @@
 # Example usage:
 set.seed(1310)
 x <- rnorm(1000)
-y <- rnorm(1000)
+y <- x
 source("getMI.R")
 MI_nats <- getMI(x, y, nBins=20, smoothingValue = 0.5, units = "nats")
 MI_bits <- getMI(x, y, nBins=20, smoothingValue = 0.5, units = "bits")
