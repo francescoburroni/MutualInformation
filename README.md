@@ -1,6 +1,7 @@
 # Histogram-Based Mutual Information (MATLAB & R)
 
-This repository contains **matched MATLAB and R implementations** of a histogram-based estimator of **mutual information (MI)** for continuous variables.
+This repository contains **matched MATLAB and R implementations** of a histogram-based estimator of **mutual information (MI)** for continuous variables, 
+as employed in phonetics research.
 
 The goal is to provide a **transparent, reproducible, and cross-language-consistent** implementation that:
 
